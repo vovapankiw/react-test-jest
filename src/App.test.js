@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { logRoles } from '@testing-library/react';
 import App from './App';
+import { replaceCamelWithSpaces } from './App';
 
 // Example how to get roles
 // test('button has correct initial color', () => {
@@ -64,4 +65,18 @@ test('Clicked disabled button has gray background and reverts to blue', () => {
   fireEvent.click(checkbox);
   expect(colorButton).toHaveStyle('background-color: blue');
  
+});
+
+describe('spaces before camel-case capital letters', () => {
+  test('Works for inner capital letters', () => {
+    expect(replaceCamelWithSpaces('Red')).toBe('Red');
+  });
+
+  test('Works for one inner capital letters', () => {
+    expect(replaceCamelWithSpaces('MidnightBlue')).toBe('Midnight Blue');
+  });
+
+  test('Works for multiple inner capital letters', () => {
+
+  });
 });
