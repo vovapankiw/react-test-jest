@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import App, { replaceCamelWithSpaces } from "./App";
 
 // Example how to get roles
