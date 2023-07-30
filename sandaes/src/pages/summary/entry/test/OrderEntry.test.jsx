@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from "msw";
 
 import { server } from "../../../../mocks/server";
@@ -11,7 +12,7 @@ test("handles error for scoops and toppings routes", async () => {
     ),
     rest.get("http://localhost:3030/toppings", (req, res, ctx) =>
       res(ctx.status(500)),
-    )
+    ),
   );
 
   render(<OrderEntry />);
