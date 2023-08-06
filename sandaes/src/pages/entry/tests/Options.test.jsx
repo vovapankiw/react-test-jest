@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-libarary-utils";
 import Options from "../Options";
 
 test("displays image for each scoop option from server", async () => {
@@ -9,6 +9,7 @@ test("displays image for each scoop option from server", async () => {
   expect(scoopImages).toHaveLength(2);
 
   // confirm alt text of images
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const altText = scoopImages.map((element) => element.alt);
   expect(altText).toEqual(["Chocolate scoop", "Vanilla scoop"]);
@@ -23,6 +24,7 @@ test("Displays image for each toppings option from server", async () => {
   expect(images).toHaveLength(3);
 
   // check the actual alt text for the images
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const imageTitles = images.map((img) => img.alt);
   expect(imageTitles).toEqual([
