@@ -5,7 +5,7 @@ import {
   render,
   screen,
   waitFor,
-} from "../../../../test-utils/testing-libarary-utils";
+} from "../../../../test-utils/testing-library-utils";
 import OrderEntry from "../OrderEntry";
 
 test("handles error for scoops and toppings routes", async () => {
