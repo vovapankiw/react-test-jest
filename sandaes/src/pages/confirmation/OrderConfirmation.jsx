@@ -18,7 +18,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
       .then((response) => {
         setOrderNumber(response.data.orderNumber);
       })
-      .catch((error) => setError(true));
+      .catch(() => setError(true));
   }, []);
 
   function handleClick() {
@@ -53,7 +53,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
         {newOrderButton}
       </div>
     );
-  } else {
-    return <div>Loading</div>;
   }
+
+  return <div>Loading</div>;
 }
