@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
+
+import { pricePerItem } from "../../constants";
+import { useOrderDetails } from "../../context/OrderDetails";
+import { formatCurrency } from "../../utilities";
+import AlertBanner from "../common/AlertBanner";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
-import AlertBanner from "../common/AlertBanner";
-import { pricePerItem } from "../../constants";
-import { formatCurrency } from "../../utilities";
-import { useOrderDetails } from "../../contexts/OrderDetails";
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
@@ -18,10 +19,11 @@ export default function Options({ optionType }) {
     axios
       .get(`http://localhost:3030/${optionType}`)
       .then((response) => setItems(response.data))
-      .catch((error) => setError(true));
+      .catch(() => setError(true));
   }, [optionType]);
 
   if (error) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return <AlertBanner />;
   }

@@ -1,27 +1,33 @@
-import { render, screen } from "@testing-library/react";
-
+import { render, screen } from "../../../../test-utils/testing-libarary-utils";
 import Options from "../Options";
 
-it("displays image for each scoop option for a a server", async () => {
+test("displays image for each scoop option from server", async () => {
   render(<Options optionType="scoops" />);
 
+  // find images
   const scoopImages = await screen.findAllByRole("img", { name: /scoop$/i });
   expect(scoopImages).toHaveLength(2);
 
-  const altText = scoopImages.map((el) => el.alt);
+  // confirm alt text of images
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const altText = scoopImages.map((element) => element.alt);
   expect(altText).toEqual(["Chocolate scoop", "Vanila scoop"]);
 });
 
-it("displays image for each topping option for a aserver", async () => {
+test("Displays image for each toppings option from server", async () => {
+  // Mock Service Worker will return three toppings from server
   render(<Options optionType="toppings" />);
 
-  const toopingImages = await screen.findAllByRole("img", {
-    name: /topping$/i,
-  });
-  expect(toopingImages).toHaveLength(3);
+  // find images, expect 3 based on what msw returns
+  const images = await screen.findAllByRole("img", { name: /topping$/i });
+  expect(images).toHaveLength(3);
 
-  const altText = toopingImages.map((el) => el.alt);
-  expect(altText).toEqual([
+  // check the actual alt text for the images
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const imageTitles = images.map((img) => img.alt);
+  expect(imageTitles).toEqual([
     "Cherries topping",
     "M&Ms topping",
     "Hot fudge topping",
