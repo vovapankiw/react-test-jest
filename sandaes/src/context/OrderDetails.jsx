@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 import { pricePerItem } from "../constants";
 
 const OrderDetails = createContext();
@@ -17,7 +16,6 @@ export function useOrderDetails() {
   return contextValue;
 }
 
-// eslint-disable-next-line max-lines-per-function
 export function OrderDetailsProvider(props) {
   const [optionCounts, setOptionCounts] = useState({
     scoops: {}, // example: { Chocolate: 1, Vanilla: 2 }
@@ -67,6 +65,5 @@ export function OrderDetailsProvider(props) {
   };
 
   const value = { optionCounts, totals, updateItemCount, resetOrder };
-  
   return <OrderDetails.Provider value={value} {...props} />;
 }
