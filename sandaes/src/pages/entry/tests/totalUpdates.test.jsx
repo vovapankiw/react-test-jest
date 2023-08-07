@@ -143,3 +143,20 @@ describe("grand total", () => {
     expect(grandTotal).toHaveTextContent("2.00");
   });
 });
+
+test("total scoop subtotal is not updated when input is invalid", async () => {
+  const user = userEvent.setup();
+  render(<Options optionType="scoops" />);
+
+  // make sure total starts out $0.00
+  const scoopsSubtotal = screen.getByText("Scoops total: $", { exact: false });
+  expect(scoopsSubtotal).toHaveTextContent("0.00");
+
+  // update vanilla scoops to 1 and check the subtotal
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "-1");
+  expect(scoopsSubtotal).toHaveTextContent("0.00");
+});
