@@ -125,3 +125,34 @@ test("Toppings header is not on summary page if no toppings ordered", async () =
   const toppingsHeading = screen.queryByRole("heading", { name: /toppings/i });
   expect(toppingsHeading).not.toBeInTheDocument();
 });
+
+test("Topping header is not on a summury page if topping ordered, then removed", async () => {
+  const user = userEvent.setup();
+  // render app
+  render(<App />);
+
+  // add vanilla scoop
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "1");
+
+  // add Cherries topping
+  const cherriesCheckbox = await screen.findByRole("checkbox", {
+    name: "Cherries",
+  });
+  await user.click(cherriesCheckbox);
+
+  // remove cherries topping
+  await user.click(cherriesCheckbox);
+
+  // find and click order summary button
+  const orderSummaryButton = screen.getByRole("button", {
+    name: /order sundae/i,
+  });
+  await user.click(orderSummaryButton);
+
+  const toppingsHeading = screen.queryByRole("heading", { name: /toppings/i });
+  expect(toppingsHeading).not.toBeInTheDocument();
+});
